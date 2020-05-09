@@ -18,7 +18,7 @@ class RYHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("JWell Flutter"),
       ),
-      body: Text("123123")
+      body: Text("123123"),
     );
   }
 }
