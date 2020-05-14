@@ -18,21 +18,12 @@ class RYHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("JWell Flutter"),
       ),
-      body: RYHomePageCountent("你好呀,JWellFlutter！！！",1),
+      body: RYHomePageCountent(),
     );
   }
 }
 
 class RYHomePageCountent extends StatefulWidget {
-
-    final String message;
-    final int age;
-
-  RYHomePageCountent(this.message, this.age);
-  RYHomePageCountent.thisJwellFlutter(this.message,{this.age});
-  RYHomePageCountent.thisIsJWellFlutter(this.message): this.age = 10{
-    print(this.age);
-  }
   @override
   _RYHomePageCountentState createState() => _RYHomePageCountentState();
 }
@@ -47,8 +38,7 @@ class _RYHomePageCountentState extends State<RYHomePageCountent> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
          _getButtons(),
-          Text("当前计数:$_counter"),
-          Text("传递过来的参数是：${widget.message},JWellFlutter is ${widget.age}"),
+          Text("当前计数:$_counter")
         ],
       ),
     );
