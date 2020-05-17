@@ -39,6 +39,7 @@ class _RYHomePageCountentState extends State<RYHomePageCountent> {
         children: <Widget>[
          _getButtons(),
           Text("当前计数:$_counter")
+
         ],
       ),
     );

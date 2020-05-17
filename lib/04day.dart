@@ -12,21 +12,21 @@ class MyApp extends StatelessWidget {
 }
 
 class RYHomePage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("JWell Flutter"),
       ),
-<<<<<<< HEAD
-      body: Text("123123"),
-=======
-      body: RYHomePageCountent(),
+      body: RYHomePageCountent.pageMessage("我的状态"),
     );
   }
 }
 
 class RYHomePageCountent extends StatefulWidget {
+  String message = "传递过来的信息";
+  RYHomePageCountent.pageMessage(this.message);
   @override
   _RYHomePageCountentState createState() => _RYHomePageCountentState();
 }
@@ -41,7 +41,8 @@ class _RYHomePageCountentState extends State<RYHomePageCountent> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _getButtons(),
-          Text("当前计数:$_counter")
+          Text("当前计数:$_counter"),
+          Text("传递过来的信息:${widget.message}")
         ],
       ),
     );
@@ -68,7 +69,6 @@ class _RYHomePageCountentState extends State<RYHomePageCountent> {
               });
             }),
       ],
->>>>>>> origin/master
     );
   }
 }
