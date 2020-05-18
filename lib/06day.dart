@@ -36,6 +36,10 @@ class _RYHomeContentState extends State<RYHomeContent> {
 }
 
 class TestDemo extends StatelessWidget {
+
+  final String textMessage;
+
+  TestDemo.setText(this.textMessage);
   @override
   Widget build(BuildContext context) {
     return Text(

@@ -19,6 +19,13 @@ class RYHomePage extends StatelessWidget {
         title: Text("JWell Flutter"),
       ),
       body: RYHomeContent(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("FloatingActionButton");
+        },
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
@@ -31,8 +38,6 @@ class RYHomeContent extends StatefulWidget {
 class _RYHomeContentState extends State<RYHomeContent> {
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(onPressed: (){
-
-    });
+    return Container();
   }
 }
