@@ -26,6 +26,7 @@ class RYHomePage extends StatelessWidget {
 
 class RYHomePageCountent extends StatefulWidget {
   String message = "传递过来的信息";
+  //  构造函数
   RYHomePageCountent.pageMessage(this.message);
   @override
   _RYHomePageCountentState createState() => _RYHomePageCountentState();
