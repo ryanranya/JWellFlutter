@@ -38,6 +38,21 @@ class RYHomeContent extends StatefulWidget {
 class _RYHomeContentState extends State<RYHomeContent> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Row(
+      children: <Widget>[
+        Text(
+          "123123",
+          style: TextStyle(fontSize: 30, color: Colors.orange),
+        ),
+        Expanded(
+          child: Text(
+            "XH12233213123123123213123123213",
+            style: TextStyle(fontSize: 35, color: Colors.lightBlue),
+            maxLines: 3,
+          ),
+        ),
+      ],
+    );
   }
 }
+
