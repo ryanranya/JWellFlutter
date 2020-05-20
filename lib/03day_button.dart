@@ -78,6 +78,23 @@ class _RYHomeContentState extends State<RYHomeContent> {
                 color: Colors.red,
               ),
               Text("关注积微"),
+              ButtonTheme(
+                minWidth: 30,
+                height: 30,
+                child: FlatButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {},
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  child: Text("JWell Button1"),
+                  color: Colors.red,
+                ),
+              ),
+              FlatButton(
+                onPressed: () {},
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                child: Text("JWell Button2"),
+                color: Colors.red,
+              ),
             ],
           ),
         ),

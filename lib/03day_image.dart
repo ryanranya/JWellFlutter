@@ -54,7 +54,23 @@ class _RYHomeContentState extends State<RYHomeContent> {
         ),
         Image(
           image: AssetImage("assets/images/timg.jpeg"),
-        )
+        ),
+        //    占位图片 FadeInImage
+//    图片缓存：1000张，100M最大的缓存
+        FadeInImage(
+//      fadeInDuration: Duration(milliseconds: 1),
+//      fadeOutDuration: Duration(milliseconds: 1),
+          placeholder: AssetImage("assets/images/timg.jpeg"),
+          image: NetworkImage(imageUrl),
+        ),
+        //    字体图标和图片资源
+        //  字体图标是矢量图，放大不会失真,可以设置颜色，图标很多时占据的空间更小
+
+        Icon(
+          Icons.pets,
+          size: 400,
+          color: Colors.blue,
+        ),
       ],
     );
   }
