@@ -49,7 +49,6 @@ class _RYHomeContentState extends State<RYHomeContent> {
         * Expanded 拉伸占满
         * */
         Expanded(
-//          flex: 2,
           child: Container(
             width: 80,
             height: 60,
@@ -61,7 +60,6 @@ class _RYHomeContentState extends State<RYHomeContent> {
           ),
         ),
         Expanded(
-//          flex: 1,
           child: Container(
             width: 120,
             height: 100,
@@ -73,7 +71,7 @@ class _RYHomeContentState extends State<RYHomeContent> {
           ),
         ),
         Container(
-          width: 90,
+          width: 290,
           height: 80,
           color: Colors.blue,
           child: Text(
