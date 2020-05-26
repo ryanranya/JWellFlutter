@@ -38,7 +38,16 @@ class RYHomeContent extends StatefulWidget {
 class _RYHomeContentState extends State<RYHomeContent> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView(
+      children: List.generate(100, (index){
+        return ListTile(
+          leading: Icon(Icons.people),
+          trailing: Icon(Icons.delete),
+          title: Text("联系人${index + 1}"),
+          subtitle: Text("联系人电话号码：13452707225"),
+        );
+      })
+    );
   }
 }
 
