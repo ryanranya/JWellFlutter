@@ -49,6 +49,7 @@ class _RYHomeContentState extends State<RYHomeContent> {
           flexibleSpace: FlexibleSpaceBar(
             title: Text("Hello JWell Flutter"),
             background: Image.asset(
+
               "assets/images/timg.jpeg",
               fit: BoxFit.fill,
             ),
