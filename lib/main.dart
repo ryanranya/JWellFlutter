@@ -50,11 +50,14 @@ class RYHomeContent extends StatefulWidget {
 class _RYHomeContentState extends State<RYHomeContent> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (BuildContext cts, int index) {
-        return orderlistitem();
-      },
-      itemCount: 30,
+    return Container(
+      color: Colors.black12,
+      child: ListView.builder(
+        itemBuilder: (BuildContext cts, int index) {
+          return orderlistitem();
+        },
+        itemCount: 30,
+      ),
     );
   }
 }
@@ -63,12 +66,17 @@ class orderlistitem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: Column(
         children: <Widget>[
           Row(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: 8),
+                padding: EdgeInsets.only(left: 18, top: 18),
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
@@ -88,20 +96,23 @@ class orderlistitem extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 5),
+                padding: EdgeInsets.only(left: 5, top: 18),
                 child: Text(
                   "SC1901010001",
                   style: TextStyle(fontSize: 12, color: Colors.black38),
                 ),
               ),
-              Image.asset(
-                "assets/images/ping.png",
-                width: 16,
-                height: 16,
+              Container(
+                padding: EdgeInsets.only(left: 5, top: 18),
+                child: Image.asset(
+                  "assets/images/ping.png",
+                  width: 16,
+                  height: 16,
+                ),
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.only(right: 8),
+                  margin: EdgeInsets.only(right: 18, top: 18),
                   child: Text(
                     "状态",
                     textAlign: TextAlign.end,
@@ -122,32 +133,33 @@ class orderlistitem extends StatelessWidget {
               "联系人:", "老刘/18883771053", "assets/images/cardown.png"),
           Divider(),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text.rich(
-                TextSpan(children: [
-                  TextSpan(
-                    text: "循环次数:",
-                    style: TextStyle(fontSize: 15, color: Colors.black38),
-                  ),
-                  TextSpan(
-                    text: "3",
-                    style: TextStyle(fontSize: 15, color: Colors.blue),
-                  ),
-                  TextSpan(
-                    text: "/7",
-                    style: TextStyle(fontSize: 15, color: Colors.black38),
-                  ),
-                ]),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    functionButton.getButtondata("详情", Colors.black),
-                    functionButton.getButtondata("运单二维码", Colors.black),
-                    functionButton.getButtondata("开始运输", Colors.black),
-                  ],
+              Container(
+                width: 110,
+                padding: EdgeInsets.only(left: 18, bottom: 18, top: 10),
+                child: Text.rich(
+                  TextSpan(children: [
+                    TextSpan(
+                      text: "循环次数:",
+                      style: TextStyle(fontSize: 15, color: Colors.black38),
+                    ),
+                    TextSpan(
+                      text: "1",
+                      style: TextStyle(fontSize: 15, color: Colors.blue),
+                    ),
+                    TextSpan(
+                      text: "/7",
+                      style: TextStyle(fontSize: 15, color: Colors.black38),
+                    ),
+                  ]),
                 ),
+              ),
+              functionButton.getButtondata("详情", Colors.black),
+              functionButton.getButtondata("运单二维码", Colors.black),
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: functionButton.getButtondata("开始运输", Colors.black),
               )
             ],
           ),
@@ -160,17 +172,27 @@ class orderlistitem extends StatelessWidget {
 class functionButton extends StatelessWidget {
   final String title;
   final Color buttonColor;
+
   functionButton.getButtondata(this.title, this.buttonColor);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 10),
+    return ButtonTheme(
+      minWidth: 40,
+      height: 30,
       child: RaisedButton(
-        padding: EdgeInsets.only(top: 10),
-        onPressed: () {},
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+        ),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        onPressed: () {
+          print("点击了按钮");
+        },
         color: buttonColor,
-        child: Text(title,style: TextStyle(color: Colors.white),),
+        child: Text(
+          title,
+          style: TextStyle(color: Colors.white, fontSize: 12),
+        ),
       ),
     );
   }
@@ -188,7 +210,7 @@ class messageLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        margin: EdgeInsets.fromLTRB(10, 9, 10, 9),
+        margin: EdgeInsets.fromLTRB(20, 9, 20, 9),
         child: Row(
           children: <Widget>[
             Image.asset(imagepath),
