@@ -14,125 +14,73 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RYHomePage extends StatelessWidget {
+class RYHomePage extends StatefulWidget {
+  @override
+  _RYHomePageState createState() => _RYHomePageState();
+}
+
+class _RYHomePageState extends State<RYHomePage> {
+  //  初始化滚动位置
+  ScrollController controller = ScrollController(initialScrollOffset: 100);
+  bool isShowFloatButton = false;
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.addListener(() {
+      print("列表滚动了。。。。${controller.offset}");
+      setState(() {
+        isShowFloatButton = controller.offset >= 1000;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        title: Text("JWell Flutter"),
-//      ),
-      body: RYHomeContent(),
-      floatingActionButton: FloatingActionButton(
+      appBar: AppBar(
+        title: Text("JWell Flutter"),
+      ),
+      body: RYHomeContent.getcontroller(controller),
+      floatingActionButton: isShowFloatButton? FloatingActionButton(
         onPressed: () {
-          print("FloatingActionButton");
+          controller.animateTo(0, duration: Duration(seconds: 1), curve: Curves.easeIn);
+
         },
         child: Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      ):null,
+
     );
   }
 }
 
+
 class RYHomeContent extends StatefulWidget {
+
+   ScrollController controller;
+   RYHomeContent.getcontroller(this.controller);
   @override
   _RYHomeContentState createState() => _RYHomeContentState();
 }
 
 class _RYHomeContentState extends State<RYHomeContent> {
+
+  @override
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          expandedHeight: 300,
-          pinned: true,
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text("Hello JWell Flutter"),
-            background: Image.asset(
-
-              "assets/images/timg.jpeg",
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-        SliverPadding(
-          padding: EdgeInsets.all(0),
-          sliver: SliverFixedExtentList(
-            itemExtent: 100, //给一个高度
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext ctx, int index) {
-                return Container(
-                  child: Text("当前是第${index}ge"),
-                  color: Color.fromARGB(255, Random().nextInt(255),
-                      Random().nextInt(255), Random().nextInt(255)),
-                );
-              },
-              childCount: 5,
-            ),
-          ),
-        ),
-        SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              childAspectRatio: 1.5),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext ctx, int index) {
-              return Container(
-                color: Color.fromARGB(255, Random().nextInt(255),
-                    Random().nextInt(255), Random().nextInt(255)),
-              );
-            },
-            childCount: 10,
-          ),
-        ),
-        SliverSafeArea(
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext ctx, int index) {
-                return ListTile(
-                  leading: Icon(Icons.people),
-                  title: Text("联系人${index}"),
-                );
-              },
-              childCount: 20,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class CustomScrollView001 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-//        可以让内容滚上安全区
-        SliverSafeArea(
-          sliver: SliverPadding(
-            padding: EdgeInsets.all(8),
-            sliver: SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext ctx, int index) {
-                  return Container(
-                    color: Color.fromARGB(255, Random().nextInt(255),
-                        Random().nextInt(255), Random().nextInt(255)),
-                  );
-                },
-                childCount: 20,
-              ),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  childAspectRatio: 1.5),
-            ),
-          ),
-        ),
-      ],
+    /**
+     * 两种监听滚动
+     * 1、controller
+     * 2、Notic
+     * */
+    return ListView.builder(
+      controller: widget.controller,
+        itemBuilder: (BuildContext ctx, int index) {
+      return ListTile(
+        title: Text("联系人${index}"),
+        leading: Icon(Icons.people),
+      );
+    },
+      itemCount: 100,
     );
   }
 }
