@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jwellflutter/douban/model/home_model.dart';
+import 'package:jwellflutter/douban/until/log.dart';
 import 'package:jwellflutter/douban/widget/dashed_line.dart';
 import 'package:jwellflutter/douban/widget/star_rating.dart';
 
@@ -50,11 +51,19 @@ class RYHomeMovieItem extends StatelessWidget {
       children: <Widget>[
         bulidContentImage(),
         SizedBox(width: 8),
-        bulidContentInfo(),
-        SizedBox(width: 8),
-        bulidContentLine(),
-        SizedBox(width: 8),
-        bulidContentWish()
+       Expanded(
+         child: IntrinsicHeight(
+           child: Row(
+             children: <Widget>[
+               bulidContentInfo(),
+               SizedBox(width: 8),
+               bulidContentLine(),
+               SizedBox(width: 8),
+               bulidContentWish()
+             ],
+           ),
+         ),
+       )
       ],
     );
   }
@@ -93,22 +102,30 @@ class RYHomeMovieItem extends StatelessWidget {
 
 //  2.2.1 是指titleLabel
   Widget bulidContentInfoTitle() {
+    List<InlineSpan> spans = [];
+    JWLog("asdasdasd", StackTrace.current);
     return Text.rich(
       TextSpan(children: [
         WidgetSpan(
-          alignment: PlaceholderAlignment.bottom,
+          baseline: TextBaseline.ideographic,
+          alignment: PlaceholderAlignment.middle,
           child: Icon(
             Icons.play_circle_outline,
             color: Colors.redAccent,
             size: 24,
           ),
         ),
-        TextSpan(
-          text: movie.title,
-          style: TextStyle(fontSize: 18),
-        ),
-        TextSpan(
-          text: "(${movie.playDate})",
+        ...movie.title.runes.map((rune) {
+          return WidgetSpan(
+              child: Text(
+                String.fromCharCode(rune),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              alignment: PlaceholderAlignment.middle);
+        }).toList(),
+        WidgetSpan(
+          alignment: PlaceholderAlignment.bottom,
+          child: Text("(${movie.playDate})"),
           style: TextStyle(fontSize: 16, color: Colors.grey),
         )
       ]),

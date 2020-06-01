@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jwellflutter/api/home_request.dart';
 import 'package:jwellflutter/douban/model/home_model.dart';
 import 'package:jwellflutter/douban/pages/home/home_movie_item/home_movie_item.dart';
-import 'package:jwellflutter/douban/pages/main/Initialize_items.dart';
-import 'package:jwellflutter/other/03_dayListView.dart';
 
 class RYDBHomePageContent extends StatefulWidget {
   @override
