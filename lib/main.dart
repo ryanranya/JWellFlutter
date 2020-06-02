@@ -57,20 +57,32 @@ class _RYHomePageState extends State<RYHomePage> {
         ),
       ),
 //      这里的类型可以做转换
-      floatingActionButton: Selector<RYConterViewModel, RYConterViewModel>(
-        selector: (context, counterVM) => counterVM,
-//        是否需要重新构建， fase 不需要
-        shouldRebuild: (prev, next) => false,
-        builder: (context, counterVM, child) {
+//      floatingActionButton: Selector<RYConterViewModel, RYConterViewModel>(
+//        selector: (context, counterVM) => counterVM,
+////        是否需要重新构建， fase 不需要
+//        shouldRebuild: (prev, next) => false,
+//        builder: (context, counterVM, child) {
+//          return FloatingActionButton(
+//            child: child,
+//            onPressed: () {
+//              counterVM.conter += 1;
+//            },
+//          );
+//        },
+//        child: Icon(Icons.add),
+//      ),
+    floatingActionButton: Selector6<RYConterViewModel, RYUserViewModel,RYConterViewModel,RYUserViewModel,RYConterViewModel,RYConterViewModel,RYConterViewModel>(
+        shouldRebuild:(provider,next) => false,
+      builder: (context,conterVM, child){
           return FloatingActionButton(
-            child: child,
-            onPressed: () {
-              counterVM.conter += 1;
-            },
-          );
+              child: child,
+              onPressed: (){
+                conterVM.conter += 1;
+          });
         },
-        child: Icon(Icons.add),
-      ),
+        selector: (context,conterVM0,userinfoVM0,conterVM1,userinfo1,conterVM2,userinfo2) => RYConterViewModel(),
+      child: Icon(Icons.add),
+    ),
     );
   }
 }
@@ -105,8 +117,10 @@ class _RYProderShowData02State extends State<RYProderShowData02> {
     return Container(
       color: Colors.blue,
       child: Consumer<RYConterViewModel>(
+        child: Text("测试这个text"),
         builder: (context, conterVM, child) {
           return Text("当前计数:${conterVM.conter}");
+//        return child;
         },
       ),
     );
@@ -138,6 +152,19 @@ class RYProvideShowData04 extends StatelessWidget {
       builder: (context, userInfoVM, ConterVM, child){
         return Text(
           "nickName${userInfoVM.user.nickName},conter${ConterVM.conter}",
+        );
+      },
+    );
+  }
+}
+
+class RYProvideShowData05 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer3<RYUserViewModel, RYConterViewModel, RYUserViewModel>(
+      builder: (context, userInfoVM, ConterVM, userInfoVM1,child){
+        return Text(
+          "nickName${userInfoVM.user.nickName},conter${ConterVM.conter},useInfo${userInfoVM1.user.imageUrl}",
         );
       },
     );
