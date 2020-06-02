@@ -4,25 +4,41 @@ main() {
   runApp(MyApp());
 }
 
-//自定这个样一个类， 继承于 InheritedWidget 需要实现抽象方法
-class RYConterWidget extends InheritedWidget {
-//  1、共享的数据
-  final int counter;
-//  2、定义构造方法
-  RYConterWidget({this.counter, Widget child}): super(child: child);
+////自定这个样一个类， 继承于 InheritedWidget 需要实现抽象方法
+//class RYConterWidget extends InheritedWidget {
+////  1、共享的数据
+//  final int counter;
+////  2、定义构造方法
+//  RYConterWidget({this.counter, Widget child}): super(child: child);
+//
+////  3、获取组最近的InheritedWIdget
+//  static RYConterWidget of(BuildContext context) {
+////    沿着Element树，去寻找最近的RYConterWidgetElement，从Element中取出Widget对象
+//    return context.dependOnInheritedWidgetOfExactType();
+//  }
+//
+////  决定要不要回调State中的didChangeDependencies
+////  如果返回时true 会触发 didChangeDependencies 这个方法
+//  @override
+//  bool updateShouldNotify(RYConterWidget oldWidget) {
+//    // TODO: implement updateShouldNotify
+//    return oldWidget.counter != counter;
+//  }
+//}
 
-//  3、获取组最近的InheritedWIdget
-  static RYConterWidget of(BuildContext context) {
-//    沿着Element树，去寻找最近的RYConterWidgetElement，从Element中取出Widget对象
-    return context.dependOnInheritedWidgetOfExactType();
-  }
+class RYConterWidget extends InheritedWidget{
+   final int conter;
 
-//  决定要不要回调State中的didChangeDependencies
-//  如果返回时true 会触发 didChangeDependencies 这个方法
+   RYConterWidget({this.conter, Widget child}): super(child: child);
+
+   static RYConterWidget of(BuildContext context){
+     return context.dependOnInheritedWidgetOfExactType();
+   }
+
   @override
   bool updateShouldNotify(RYConterWidget oldWidget) {
     // TODO: implement updateShouldNotify
-    return oldWidget.counter != counter;
+    return oldWidget.conter != conter;
   }
 }
 
@@ -52,7 +68,7 @@ class _RYHomePageState extends State<RYHomePage> {
         ),
       ),
       body: RYConterWidget(
-        counter: _conter,
+        conter: _conter,
         child: Column(
           children: <Widget>[
             RYShowData01(),
@@ -87,7 +103,7 @@ class _RYShowData01State extends State<RYShowData01> {
 
   @override
   Widget build(BuildContext context) {
-    int conter = RYConterWidget.of(context).counter;
+    int conter = RYConterWidget.of(context).conter;
     return Card(
       color: Colors.orange,
       child: Text(
@@ -105,7 +121,7 @@ class RYShowData02 extends StatefulWidget {
 class _RYShowData02State extends State<RYShowData02> {
   @override
   Widget build(BuildContext context) {
-    int conter = RYConterWidget.of(context).counter;
+    int conter = RYConterWidget.of(context).conter;
     return Container(
       color: Colors.blue,
       child: Text("当前计数:${conter}"),
