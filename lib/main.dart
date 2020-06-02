@@ -111,6 +111,11 @@ class _RYProderShowData02State extends State<RYProderShowData02> {
       ),
     );
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    print("生命周期销毁");
+  }
 }
 
 class RYProvideShowData03 extends StatelessWidget {

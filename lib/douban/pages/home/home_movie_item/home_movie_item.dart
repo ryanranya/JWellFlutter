@@ -134,17 +134,20 @@ class RYHomeMovieItem extends StatelessWidget {
 
 //  2.2.2 评分
   Widget bulidContentInfoRate() {
-    return Row(
-      children: <Widget>[
-        RYStarRating(
-          rating: movie.rating,
-          size: 20,
-        ),
-        Text(
-          "${movie.rating}",
-          style: TextStyle(fontSize: 16),
-        ),
-      ],
+//    做适配的widget
+    return FittedBox(
+      child: Row(
+        children: <Widget>[
+          RYStarRating(
+            rating: movie.rating,
+            size: 20,
+          ),
+          Text(
+            "${movie.rating}",
+            style: TextStyle(fontSize: 16),
+          ),
+        ],
+      ),
     );
   }
 
