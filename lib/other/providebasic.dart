@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:jwellflutter/day_proder/viewmodel/user_viewmodel.dart';
-import 'package:jwellflutter/day_proder/viewmodel/init_provider.dart';
 import 'package:jwellflutter/day_proder/viewmodel/viewmodel.dart';
+import 'package:provider/provider.dart';
 
 /**
  * 1、创建自己需要共享的数据
@@ -14,12 +12,10 @@ import 'package:jwellflutter/day_proder/viewmodel/viewmodel.dart';
  * */
 main() {
 //  顶层来包裹他
-  runApp(
-    MultiProvider(
-      providers: providers,
-      child: MyApp(),
-    ),
-  );
+  runApp(ChangeNotifierProvider(
+    create: (context) => RYConterViewModel(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -51,8 +47,6 @@ class _RYHomePageState extends State<RYHomePage> {
           children: <Widget>[
             RYProderShowData01(),
             RYProderShowData02(),
-            RYProvideShowData03(),
-            RYProvideShowData04(),
           ],
         ),
       ),
@@ -112,30 +106,3 @@ class _RYProderShowData02State extends State<RYProderShowData02> {
     );
   }
 }
-
-class RYProvideShowData03 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<RYUserViewModel>(
-      builder: (context, userInfoVM, child){
-        return Text(
-          "nickName${userInfoVM.user.nickName}",
-        );
-      },
-    );
-  }
-}
-
-class RYProvideShowData04 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer2<RYUserViewModel, RYConterViewModel>(
-      builder: (context, userInfoVM, ConterVM, child){
-        return Text(
-          "nickName${userInfoVM.user.nickName},conter${ConterVM.conter}",
-        );
-      },
-    );
-  }
-}
-
