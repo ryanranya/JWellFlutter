@@ -87,7 +87,7 @@ class _RYShowData01State extends State<RYShowData01> {
 
   @override
   Widget build(BuildContext context) {
-    int conter = RYConterWidget.of(context).conter;
+    int conter = RYConterWidget.of(context).counter;
     return Card(
       color: Colors.orange,
       child: Text(
@@ -105,7 +105,7 @@ class RYShowData02 extends StatefulWidget {
 class _RYShowData02State extends State<RYShowData02> {
   @override
   Widget build(BuildContext context) {
-    int conter = RYConterWidget.of(context).conter;
+    int conter = RYConterWidget.of(context).counter;
     return Container(
       color: Colors.blue,
       child: Text("当前计数:${conter}"),
