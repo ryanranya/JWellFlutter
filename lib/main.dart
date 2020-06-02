@@ -4,41 +4,25 @@ main() {
   runApp(MyApp());
 }
 
-////自定这个样一个类， 继承于 InheritedWidget 需要实现抽象方法
-//class RYConterWidget extends InheritedWidget {
-////  1、共享的数据
-//  final int counter;
-////  2、定义构造方法
-//  RYConterWidget({this.counter, Widget child}): super(child: child);
-//
-////  3、获取组最近的InheritedWIdget
-//  static RYConterWidget of(BuildContext context) {
-////    沿着Element树，去寻找最近的RYConterWidgetElement，从Element中取出Widget对象
-//    return context.dependOnInheritedWidgetOfExactType();
-//  }
-//
-////  决定要不要回调State中的didChangeDependencies
-////  如果返回时true 会触发 didChangeDependencies 这个方法
-//  @override
-//  bool updateShouldNotify(RYConterWidget oldWidget) {
-//    // TODO: implement updateShouldNotify
-//    return oldWidget.counter != counter;
-//  }
-//}
+//自定这个样一个类， 继承于 InheritedWidget 需要实现抽象方法
+class RYConterWidget extends InheritedWidget {
+//  1、共享的数据
+  final int counter;
+//  2、定义构造方法
+  RYConterWidget({this.counter, Widget child}): super(child: child);
 
-class RYConterWidget extends InheritedWidget{
-   final int conter;
+//  3、获取组最近的InheritedWIdget
+  static RYConterWidget of(BuildContext context) {
+//    沿着Element树，去寻找最近的RYConterWidgetElement，从Element中取出Widget对象
+    return context.dependOnInheritedWidgetOfExactType();
+  }
 
-   RYConterWidget({this.conter, Widget child}): super(child: child);
-
-   static RYConterWidget of(BuildContext context){
-     return context.dependOnInheritedWidgetOfExactType();
-   }
-
+//  决定要不要回调State中的didChangeDependencies
+//  如果返回时true 会触发 didChangeDependencies 这个方法
   @override
   bool updateShouldNotify(RYConterWidget oldWidget) {
     // TODO: implement updateShouldNotify
-    return oldWidget.conter != conter;
+    return oldWidget.counter != counter;
   }
 }
 
@@ -68,7 +52,7 @@ class _RYHomePageState extends State<RYHomePage> {
         ),
       ),
       body: RYConterWidget(
-        conter: _conter,
+        counter: _conter,
         child: Column(
           children: <Widget>[
             RYShowData01(),
