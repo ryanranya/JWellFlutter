@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:jwellflutter/other/animation_04page.dart';
-import 'package:jwellflutter/other/animation_05.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,6 +34,7 @@ class _RYAnHomeState extends State<RYAnHome>
   Animation _colorAnim;
   Animation _opacityAnim;
   Animation _radiansAnim;
+
 
   @override
   void initState() {
@@ -87,54 +86,36 @@ class _RYAnHomeState extends State<RYAnHome>
         title: Text("首页"),
       ),
       body: Center(
-          child: GridView(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 16 / 9,
-        ),
-        children: List.generate(20, (index) {
-          final imageURL = "https://picsum.photos/500/500?random=${index}";
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(PageRouteBuilder(
-                pageBuilder: (ctx, anm1, aim2) {
-                  return FadeTransition(
-                    opacity: anm1,
-                    child: RYImageDetail(imageURL),
-                  );
-                },
-              ));
-            },
-            child: Hero(
-              tag: imageURL,
-              child: Image.network(
-                imageURL,
-                fit: BoxFit.cover,
+        child: AnimatedBuilder(animation: _controller, builder: (ctx, child) {
+          return Opacity(
+            opacity: _opacityAnim.value,
+            child: Transform(
+              transform: Matrix4.rotationZ(_radiansAnim.value),
+              alignment: Alignment.center,
+              child: Container(
+                width: _sizeAnim.value,
+                height: _sizeAnim.value,
+
+                color: _colorAnim.value,
               ),
             ),
           );
         }),
-      )),
+      ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.pool),
+          child: Icon(Icons.play_circle_outline),
           onPressed: () {
-//            模态推送页面
-//            Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
-//              return RYAnimationModelPage();
-//            },
-////              iOS 模态推送出来
-//              fullscreenDialog: true,
-//            ));
-
-//          自定义转出动画
-            Navigator.of(context).push(PageRouteBuilder(
-                transitionDuration: Duration(seconds: 3),
-                pageBuilder: (ctx, anm1, anm2) {
-                  return FadeTransition(
-                      opacity: anm1, child: RYAnimationModelPage());
-                }));
+            if (_controller.isAnimating) {
+              _controller.stop();
+            } else {
+              if (_controller.status == AnimationStatus.forward) {
+                _controller.forward();
+              } else if (_controller.status == AnimationStatus.reverse) {
+                _controller.reverse();
+              } else {
+                _controller.forward();
+              }
+            }
           }),
     );
   }
@@ -145,3 +126,19 @@ class _RYAnHomeState extends State<RYAnHome>
     _controller.dispose();
   }
 }
+/**
+ *Animation: 抽象类
+ * 监听值改变
+ * 监听动画状态的改变
+ * value
+ * statues
+ * 2、AnimationController 继承 Animation
+ * vsync: 同步信号(this -> with SingleTickerProviderStateMixin)
+ * *forward():向前执行
+ * *reverse():反转执行动画
+ * 3、CurverAnimation:
+ * 作用：设置动画执行的速率(速度曲线)
+ * 4、Tween:设置动画执行的value范围
+ * *begin：开始值
+ * *end：结束值
+ * */
