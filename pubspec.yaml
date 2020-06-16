@@ -33,6 +33,7 @@ dependencies:
   provider: ^4.1.2
   #跨组件传值
   event_bus: ^1.1.1
+  flutter_boost: ^1.12.13+2
 
 dev_dependencies:
   flutter_test:
